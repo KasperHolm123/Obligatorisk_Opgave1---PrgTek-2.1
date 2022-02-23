@@ -7,8 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="200,0,0,0">
-
+        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Navn"/>
+                <DataGridTextColumn Header="Prioritet" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Navn"/>
+                <DataGridTextColumn Header="Tidspunkt"/>
+            </DataGrid.Columns>
         </DataGrid>
 
     </Grid>

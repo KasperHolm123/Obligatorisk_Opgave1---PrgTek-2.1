@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1.Models
 {
-    public class Vampire
+    public class Vampire : IComparable<Vampire>
     {
         public int BloodCurrency { get; set; }
         public int Priority { get; set; }
         public string Name { get; set; }
 
-        public Vampire(int bCurrency, int priority, string name)
+        public Vampire(int bCurrency, string name)
         {
             BloodCurrency = bCurrency;
-            Priority = priority;
             Name = name;
+        }
+
+        public int CompareTo(Vampire other)
+        {
+            return BloodCurrency.CompareTo(other.BloodCurrency);
         }
     }
 }

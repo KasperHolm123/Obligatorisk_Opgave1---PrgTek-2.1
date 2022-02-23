@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Obligatorisk_Opgave1.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,10 @@ namespace Obligatorisk_Opgave1
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel model = new MainViewModel();
         public MainWindow()
         {
+            DataContext = model;
             InitializeComponent();
         }
     }

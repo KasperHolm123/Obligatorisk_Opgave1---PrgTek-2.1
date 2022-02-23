@@ -10,17 +10,17 @@ namespace Obligatorisk_Opgave1
 {
     public class PriorityQueue<T> : IEnumerable<T> where T : IComparable<T>
     {
-        private LinkedList<T> _vampiresList = new LinkedList<T>();
+        private LinkedList<T> _list = new LinkedList<T>();
 
         public void Enqueue(T item)
         {
-            if (_vampiresList.Count == 0)
+            if (_list.Count == 0)
             {
-                _vampiresList.AddLast(item);
+                _list.AddLast(item);
             }
             else
             {
-                var current = _vampiresList.First;
+                var current = _list.First;
 
                 while (current != null && current.Value.CompareTo(item) < 0)
                 {
@@ -29,52 +29,52 @@ namespace Obligatorisk_Opgave1
 
                 if (current == null)
                 {
-                    _vampiresList.AddLast(item);
+                    _list.AddLast(item);
                 }
                 else
                 {
-                    _vampiresList.AddBefore(current, item);
+                    _list.AddBefore(current, item);
                 }
             }
         }
 
         public T Dequeue()
         {
-            if (_vampiresList.Count == 0)
+            if (_list.Count == 0)
             {
                 throw new InvalidOperationException("The queue is empty");
             }
 
-            T value = _vampiresList.First.Value;
+            T value = _list.First.Value;
 
-            _vampiresList.RemoveFirst();
+            _list.RemoveFirst();
 
             return value;
         }
 
         public T Peek()
         {
-            if (_vampiresList.Count == 0)
+            if (_list.Count == 0)
             {
                 throw new InvalidOperationException("The queue is empty");
             }
 
-            return _vampiresList.First.Value;
+            return _list.First.Value;
         }
 
         public void Clear()
         {
-            _vampiresList.Clear();
+            _list.Clear();
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return _vampiresList.GetEnumerator();
+            return _list.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _vampiresList.GetEnumerator();
+            return _list.GetEnumerator();
         }
     }
 }

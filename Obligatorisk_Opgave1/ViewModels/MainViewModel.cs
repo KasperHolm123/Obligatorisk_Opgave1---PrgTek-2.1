@@ -10,7 +10,7 @@ namespace Obligatorisk_Opgave1.ViewModels
 {
     public class MainViewModel
     {
-        
+
     }
     public class RelayCommand : ICommand
     {

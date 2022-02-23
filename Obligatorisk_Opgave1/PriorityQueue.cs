@@ -25,7 +25,7 @@ namespace Obligatorisk_Opgave1
             {
                 var current = _list.First;
 
-                while (current != null && current.Value.CompareTo(item) < 0)
+                while (current != null && current.Value.CompareTo(item) > 0)
                 {
                     current = current.Next;
                 }
@@ -39,7 +39,7 @@ namespace Obligatorisk_Opgave1
                     _list.AddBefore(current, item);
                 }
             }
-            OnCollectionChanged("Add");
+            OnCollectionChanged();
         }
 
         public T Dequeue()
@@ -52,7 +52,7 @@ namespace Obligatorisk_Opgave1
             T value = _list.First.Value;
 
             _list.RemoveFirst();
-            OnCollectionChanged("Remove");
+            OnCollectionChanged();
             return value;
         }
 
@@ -65,15 +65,11 @@ namespace Obligatorisk_Opgave1
 
             return _list.First.Value;
         }
-        private void OnCollectionChanged(string operation)
+        private void OnCollectionChanged()
         {
             if(CollectionChanged != null)
             {
-                if (operation == "Add")
-                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
-
-                else
-                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
         public void Clear()

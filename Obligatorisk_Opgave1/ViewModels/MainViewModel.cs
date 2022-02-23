@@ -7,22 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Obligatorisk_Opgave1.ViewModels
 {
     public class MainViewModel
     {
-        public PriorityQueue<Vampire> Vampires { get; set; }
+        public PriorityQueue<Vampire> StartVampires { get; set; }
+        public PriorityQueue<Vampire> EndVampires { get; set; }
 
         public RelayCommand StartCall { get; set; }
-        public RelayCommand EndCall { get; set; }
+        public RelayCommand StopCall { get; set; }
 
         public MainViewModel()
         {
+            StartVampires = new PriorityQueue<Vampire>();
+            EndVampires = new PriorityQueue<Vampire>();
             FillLists();
-            Vampires = new PriorityQueue<Vampire>();
-            StartCall = new RelayCommand(p => );
-            EndCall = new RelayCommand(p => );
+            StartCall = new RelayCommand(p => TakeCall());
+            StopCall = new RelayCommand(p => EndCall());
         }
 
         private void FillLists()
@@ -31,15 +34,25 @@ namespace Obligatorisk_Opgave1.ViewModels
             Vampire vamp2 = new Vampire(50, "bruh");
             Vampire vamp3 = new Vampire(200, "br");
             Vampire vamp4 = new Vampire(100, "Jonas");
-            Vampires.Enqueue(vamp1);
-            Vampires.Enqueue(vamp4);
-            Vampires.Enqueue(vamp2);
-            Vampires.Enqueue(vamp3);
+            StartVampires.Enqueue(vamp1);
+            StartVampires.Enqueue(vamp4);
+            StartVampires.Enqueue(vamp2);
+            StartVampires.Enqueue(vamp3);
         }
-
+        private Vampire currVamp;
+        bool CallStarted;
         private void TakeCall()
         {
+            currVamp = StartVampires.Dequeue();
+            CallStarted = true;
+        }
 
+        private void EndCall()
+        {
+            if (CallStarted == true)
+                EndVampires.Enqueue(currVamp);
+            CallStarted = false;
+            
         }
 
     }

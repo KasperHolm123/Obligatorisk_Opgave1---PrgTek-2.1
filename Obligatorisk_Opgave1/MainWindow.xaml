@@ -7,20 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False">
+        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding StartVampires}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Navn" Binding="{Binding StartVampList}"/>
-                <DataGridTextColumn Header="Prioritet" Binding="{Binding EndVampList}"/>
+                <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Prioritet"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0" AutoGenerateColumns="False">
+        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding EndVampires}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Navn"/>
+                <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Tidspunkt"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Tag opkald" HorizontalAlignment="Left" Margin="295,56,0,0" VerticalAlignment="Top" Command=""/>
-        <Button Content="Afslut opkald" HorizontalAlignment="Left" Margin="451,56,0,0" VerticalAlignment="Top" Command=""/>
+        <Button Content="Tag opkald" HorizontalAlignment="Left" Margin="295,56,0,0" VerticalAlignment="Top" Command="{Binding StartCall}"/>
+        <Button Content="Afslut opkald" HorizontalAlignment="Left" Margin="451,56,0,0" VerticalAlignment="Top" Command="{Binding StopCall}"/>
 
     </Grid>
 </Window>

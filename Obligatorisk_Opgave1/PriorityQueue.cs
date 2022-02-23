@@ -11,7 +11,7 @@ namespace Obligatorisk_Opgave1
 {
     public class PriorityQueue<T> : INotifyCollectionChanged, IEnumerable<T> where T : IComparable<T>
     {
-        private LinkedList<T> _list = new LinkedList<T>();
+        public LinkedList<T> _list = new LinkedList<T>();
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
@@ -79,6 +79,11 @@ namespace Obligatorisk_Opgave1
         public void Clear()
         {
             _list.Clear();
+        }
+
+        public IEnumerable VampireList
+        {
+            get { return _list; }
         }
 
         public IEnumerator<T> GetEnumerator()

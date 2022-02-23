@@ -12,8 +12,6 @@ namespace Obligatorisk_Opgave1.ViewModels
 {
     public class MainViewModel
     {
-        public ObservableCollection<Vampire> EndVampList { get; set; }
-        public ObservableCollection<Vampire> StartVampList { get; set; }
         public PriorityQueue<Vampire> Vampires { get; set; }
 
         public RelayCommand StartCall { get; set; }
@@ -21,10 +19,8 @@ namespace Obligatorisk_Opgave1.ViewModels
 
         public MainViewModel()
         {
-            StartVampList = new ObservableCollection<Vampire>();
-            EndVampList = new ObservableCollection<Vampire>();
-            Vampires = new PriorityQueue<Vampire>();
             FillLists();
+            Vampires = new PriorityQueue<Vampire>();
             StartCall = new RelayCommand(p => );
             EndCall = new RelayCommand(p => );
         }
@@ -39,7 +35,6 @@ namespace Obligatorisk_Opgave1.ViewModels
             Vampires.Enqueue(vamp4);
             Vampires.Enqueue(vamp2);
             Vampires.Enqueue(vamp3);
-            StartVampList.Add();
         }
 
         private void TakeCall()

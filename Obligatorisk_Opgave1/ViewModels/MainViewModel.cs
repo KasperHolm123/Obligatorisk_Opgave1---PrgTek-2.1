@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace Obligatorisk_Opgave1.ViewModels
 {
     public class MainViewModel
     {
-
+        
     }
     public class RelayCommand : ICommand
     {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1
 {
-    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> where T : IComparable<T>, IPrioritizable
+    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> where T : IComparable<T>
     {
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
@@ -31,7 +31,7 @@ namespace Obligatorisk_Opgave1
             else
             {
                 var current = _list.First;
-                while (current != null && current.Value.CompareTo(item) > 0)
+                while (current != null && current.Value.CompareTo(item) < p)
                     current = current.Next;
 
                 if (current == null)

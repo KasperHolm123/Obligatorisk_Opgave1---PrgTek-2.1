@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1.Models
 {
-    public class Vampire : IComparable<Vampire>, IPrioritizable
+    public class Vampire : IComparable<Vampire>
     {
         public int BloodCurrency { get; set; }
         public int Priority { get; set; }
@@ -21,7 +21,7 @@ namespace Obligatorisk_Opgave1.Models
 
         public int CompareTo(Vampire other)
         {
-            return BloodCurrency.CompareTo(other.BloodCurrency);
+            return Priority.CompareTo(other.Priority);
         }
     }
 }

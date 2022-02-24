@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1
 {
-    public class PriorityQueue<T> : INotifyCollectionChanged, IEnumerable<T> where T : IComparable<T>
+    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> where T : IComparable<T>
     {
         public LinkedList<T> _list = new LinkedList<T>();
 
@@ -82,6 +82,8 @@ namespace Obligatorisk_Opgave1
             get { return _list; }
         }
 
+        int IPriorityQueue<T>.Count => throw new NotImplementedException();
+
         public IEnumerator<T> GetEnumerator()
         {
             return _list.GetEnumerator();
@@ -90,6 +92,16 @@ namespace Obligatorisk_Opgave1
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _list.GetEnumerator();
+        }
+
+        void IPriorityQueue<T>.Enqueue(T elem, int p)
+        {
+            throw new NotImplementedException();
+        }
+
+        T[] IPriorityQueue<T>.ToArray()
+        {
+            return _list.ToArray();
         }
     }
 }

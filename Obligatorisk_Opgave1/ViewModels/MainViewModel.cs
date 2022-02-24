@@ -11,13 +11,16 @@ using System.Diagnostics;
 
 namespace Obligatorisk_Opgave1.ViewModels
 {
+    public delegate void WarningMessage(Exception ex);
     public class MainViewModel
     {
         public PriorityQueue<Vampire> StartVampires { get; set; }
         public PriorityQueue<Vampire> EndVampires { get; set; }
-
+        public string CurrName { get; set; }
+        public int CurrPriority { get; set; }
         public RelayCommand StartCall { get; set; }
         public RelayCommand StopCall { get; set; }
+        public event WarningMessage CallFailed;
 
         public MainViewModel()
         {
@@ -43,14 +46,24 @@ namespace Obligatorisk_Opgave1.ViewModels
         bool CallStarted;
         private void TakeCall()
         {
-            currVamp = StartVampires.Dequeue();
-            CallStarted = true;
+            try
+            {
+                if(CallStarted) throw new Exception("bruh");
+                currVamp = StartVampires.Dequeue();
+                CurrName = currVamp.Name;
+                CurrPriority = currVamp.Priority;
+                CallStarted = true;
+            }
+            catch (Exception ex)
+            {
+                if(CallFailed == null) CallFailed(ex);
+            }
         }
 
         private void EndCall()
         {
-            if (CallStarted == true)
-                EndVampires.Enqueue(currVamp);
+            EndVampires.Enqueue(currVamp);
+            CurrName = null;
             CallStarted = false;
             
         }

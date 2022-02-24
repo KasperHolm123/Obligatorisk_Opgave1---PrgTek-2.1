@@ -10,7 +10,7 @@
         <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding StartVampires}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Prioritet"/>
+                <DataGridTextColumn Header="Prioritet" Binding="{Binding Priority}"/>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding EndVampires}">

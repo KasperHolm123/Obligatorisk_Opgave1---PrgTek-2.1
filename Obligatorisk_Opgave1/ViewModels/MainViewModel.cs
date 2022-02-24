@@ -33,15 +33,16 @@ namespace Obligatorisk_Opgave1.ViewModels
 
         private void FillLists()
         {
-            Vampire vamp1 = new Vampire(0, "Kasper");
-            Vampire vamp2 = new Vampire(50, "bruh");
-            Vampire vamp3 = new Vampire(200, "br");
-            Vampire vamp4 = new Vampire(100, "Jonas");
-            StartVampires.Enqueue(vamp1);
-            StartVampires.Enqueue(vamp4);
-            StartVampires.Enqueue(vamp2);
-            StartVampires.Enqueue(vamp3);
+            Vampire vamp1 = new Vampire(1, 0, "Kasper");
+            Vampire vamp2 = new Vampire(2, 50, "bruh");
+            Vampire vamp3 = new Vampire(3, 200, "br");
+            Vampire vamp4 = new Vampire(4, 100, "Jonas");
+            StartVampires.Enqueue(vamp1, vamp1.Priority);
+            StartVampires.Enqueue(vamp4, vamp4.Priority);
+            StartVampires.Enqueue(vamp2, vamp2.Priority);
+            StartVampires.Enqueue(vamp3, vamp3.Priority);
         }
+
         private Vampire currVamp;
         bool CallStarted;
         private void TakeCall()
@@ -69,6 +70,7 @@ namespace Obligatorisk_Opgave1.ViewModels
         }
 
     }
+
     public class RelayCommand : ICommand
     {
         readonly Action<object> execute;

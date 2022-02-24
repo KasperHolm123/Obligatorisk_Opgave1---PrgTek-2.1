@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1.Models
 {
-    public class Vampire : IComparable<Vampire>
+    public class Vampire : IComparable<Vampire>, IPrioritizable
     {
         public int BloodCurrency { get; set; }
         public int Priority { get; set; }

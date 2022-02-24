@@ -30,9 +30,9 @@ namespace Obligatorisk_Opgave1.ViewModels
 
         private void FillLists()
         {
-            Vampire vamp1 = new Vampire(5, 0, "Kasper");
+            Vampire vamp1 = new Vampire(1, 0, "Kasper");
             Vampire vamp2 = new Vampire(2, 50, "bruh");
-            Vampire vamp3 = new Vampire(1, 200, "br");
+            Vampire vamp3 = new Vampire(3, 200, "br");
             Vampire vamp4 = new Vampire(4, 100, "Jonas");
             StartVampires.Enqueue(vamp1, vamp1.Priority);
             StartVampires.Enqueue(vamp4, vamp4.Priority);

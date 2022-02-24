@@ -39,6 +39,7 @@ namespace Obligatorisk_Opgave1.ViewModels
             StartVampires.Enqueue(vamp2);
             StartVampires.Enqueue(vamp3);
         }
+
         private Vampire currVamp;
         bool CallStarted;
         private void TakeCall()
@@ -49,13 +50,14 @@ namespace Obligatorisk_Opgave1.ViewModels
 
         private void EndCall()
         {
-            if (CallStarted == true)
+            if (CallStarted)
                 EndVampires.Enqueue(currVamp);
             CallStarted = false;
             
         }
 
     }
+
     public class RelayCommand : ICommand
     {
         readonly Action<object> execute;

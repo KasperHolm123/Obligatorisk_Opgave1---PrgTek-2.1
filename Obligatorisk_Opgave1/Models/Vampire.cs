@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1.Models
 {
-    public class Vampire : IComparable<Vampire>
+    public class Vampire : IComparable<Vampire>, IPrioritizable
     {
         public int BloodCurrency { get; set; }
         public int Priority { get; set; }
         public string Name { get; set; }
 
-        public Vampire(int bCurrency, string name)
+        public Vampire(int priority, int bCurrency, string name)
         {
+            Priority = priority;
             BloodCurrency = bCurrency;
             Name = name;
         }

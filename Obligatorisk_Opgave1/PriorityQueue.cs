@@ -31,7 +31,7 @@ namespace Obligatorisk_Opgave1
             else
             {
                 var current = _list.First;
-                while (current != null && current.Value.Priority < p)
+                while (current != null && current.Value.Priority < p && current.Value.Priority > 0)
                     current = current.Next;
 
                 if (current == null)

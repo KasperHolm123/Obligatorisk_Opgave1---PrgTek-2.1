@@ -7,20 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding StartVampires}">
+        <!-- Start vampie grid-->
+        <DataGrid x:Name="temp" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding StartVampires}" SelectedItem="{Binding selectedVamp}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Prioritet" Binding="{Binding Priority}"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Gør VIP" Command="{Binding MakeVip}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
+        
+        <!-- End vampire grid-->
         <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding EndVampires}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Tidspunkt"/>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <!-- Functionality-->
         <Button Content="Tag opkald" HorizontalAlignment="Left" Margin="238,56,0,0" VerticalAlignment="Top" Command="{Binding StartCall}"/>
         <Button Content="Afslut opkald" HorizontalAlignment="Left" Margin="500,56,0,0" VerticalAlignment="Top" Command="{Binding StopCall}"/>
+        <Button Content="Lav vip" HorizontalAlignment="Left" Margin="380,56,0,0" VerticalAlignment="Top" Command="{Binding MakeVip}"/>
         <Label Content="Nuværende opkald" HorizontalAlignment="Center" Margin="0,99,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding CallerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top"/>
 

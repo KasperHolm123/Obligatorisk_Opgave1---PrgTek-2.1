@@ -54,6 +54,11 @@ namespace Obligatorisk_Opgave1
             return value;
         }
 
+        public void Remove(T item)
+        {
+            _list.Remove(item);
+        }
+
         public T Peek()
         {
             if (_list.Count == 0)

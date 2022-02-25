@@ -27,6 +27,8 @@
                 <DataGridTextColumn Header="Tidspunkt"/>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <!-- Vip grid-->
         <DataGrid Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="325,45,0,0" AutoGenerateColumns="False" ItemsSource="{Binding VipVampires}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>

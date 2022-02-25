@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1
 {
-    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> where T : IComparable<T>
+    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> 
     {
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 

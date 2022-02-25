@@ -57,7 +57,7 @@ namespace Obligatorisk_Opgave1.ViewModels
             }
             catch (Exception ex)
             {
-                if(CallFailed == null) CallFailed(ex);
+                if(CallFailed != null) CallFailed(ex);
             }
         }
 

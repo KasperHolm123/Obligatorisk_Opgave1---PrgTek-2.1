@@ -21,6 +21,10 @@
         </DataGrid>
         <Button Content="Tag opkald" HorizontalAlignment="Left" Margin="295,56,0,0" VerticalAlignment="Top" Command="{Binding StartCall}"/>
         <Button Content="Afslut opkald" HorizontalAlignment="Left" Margin="451,56,0,0" VerticalAlignment="Top" Command="{Binding StopCall}"/>
+        <Label Content="Nuværende klient:" HorizontalAlignment="Left" Margin="310,117,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Path = CurrName}" HorizontalAlignment="Left" Margin="422,125,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Prioritet:" HorizontalAlignment="Left" Margin="319,148,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Path = CurrPriority}" HorizontalAlignment="Left" Margin="374,156,0,0" VerticalAlignment="Top" Width="20"/>
 
     </Grid>
 </Window>

@@ -25,6 +25,10 @@ namespace Obligatorisk_Opgave1
         public MainWindow()
         {
             DataContext = model;
+            model.CallFailed += delegate(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            };
             InitializeComponent();
         }
     }

@@ -11,13 +11,17 @@ using System.Diagnostics;
 
 namespace Obligatorisk_Opgave1.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public PriorityQueue<Vampire> StartVampires { get; set; }
         public PriorityQueue<Vampire> EndVampires { get; set; }
 
         public RelayCommand StartCall { get; set; }
         public RelayCommand StopCall { get; set; }
+
+        private string callerName = "";
 
         public MainViewModel()
         {
@@ -43,19 +47,39 @@ namespace Obligatorisk_Opgave1.ViewModels
         }
 
         private Vampire currVamp;
-        bool CallStarted;
         private void TakeCall()
         {
-            currVamp = StartVampires.Dequeue();
-            CallStarted = true;
+            if (currVamp == null)
+            {
+                currVamp = StartVampires.Dequeue();
+                CallerName = currVamp.Name;
+            }
         }
 
         private void EndCall()
         {
-            if (CallStarted)
+            if (currVamp != null)
+            {
                 EndVampires.Enqueue(currVamp);
-            CallStarted = false;
+                CallerName = "";
+                currVamp = null;
+            }
             
+        }
+
+        public string CallerName
+        {
+            get { return callerName; }
+            set
+            {
+                callerName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void OnPropertyChanged(string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
     }

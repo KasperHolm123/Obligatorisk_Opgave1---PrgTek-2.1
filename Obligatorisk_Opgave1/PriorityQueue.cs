@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1
 {
-    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> where T : IPrioritizable
+    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> 
     {
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
@@ -70,6 +70,8 @@ namespace Obligatorisk_Opgave1
             throw new NotImplementedException();
         }
 
+        int IPriorityQueue<T>.Count => throw new NotImplementedException();
+
         public IEnumerator<T> GetEnumerator()
         {
             return _list.GetEnumerator();
@@ -79,11 +81,19 @@ namespace Obligatorisk_Opgave1
         {
             return _list.GetEnumerator();
         }
-
         private void OnCollectionChanged()
         {
-            if(CollectionChanged != null)
+            if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+        void IPriorityQueue<T>.Enqueue(T elem, int p)
+        {
+            throw new NotImplementedException();
+        }
+
+        T[] IPriorityQueue<T>.ToArray()
+        {
+            return _list.ToArray();
         }
     }
 }

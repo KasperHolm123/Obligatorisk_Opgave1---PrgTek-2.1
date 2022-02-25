@@ -11,15 +11,18 @@ using System.Diagnostics;
 
 namespace Obligatorisk_Opgave1.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public delegate void WarningMessage(Exception ex);
+    public class MainViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         public PriorityQueue<Vampire> StartVampires { get; set; }
         public PriorityQueue<Vampire> EndVampires { get; set; }
-
+        public string CurrName { get; set; }
+        public int CurrPriority { get; set; }
         public RelayCommand StartCall { get; set; }
         public RelayCommand StopCall { get; set; }
+        public event WarningMessage CallFailed;
 
         private string callerName = "";
 
@@ -49,10 +52,17 @@ namespace Obligatorisk_Opgave1.ViewModels
         private Vampire currVamp;
         private void TakeCall()
         {
-            if (currVamp == null)
+            try
             {
+                if(CallStarted) throw new Exception("bruh");
                 currVamp = StartVampires.Dequeue();
-                CallerName = currVamp.Name;
+                CurrName = currVamp.Name;
+                CurrPriority = currVamp.Priority;
+                CallStarted = true;
+            }
+            catch (Exception ex)
+            {
+                if(CallFailed != null) CallFailed(ex);
             }
         }
 

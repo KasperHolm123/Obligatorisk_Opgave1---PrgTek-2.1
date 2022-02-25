@@ -8,20 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <!-- Start vampie grid-->
-        <DataGrid x:Name="temp" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding StartVampires}" SelectedItem="{Binding selectedVamp}">
+        <DataGrid x:Name="temp" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding StartVampires}" SelectedItem="{Binding selectedVamp}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Prioritet" Binding="{Binding Priority}"/>
             </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Gør VIP" Command="{Binding MakeVip}"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
         </DataGrid>
         
         <!-- End vampire grid-->
-        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding EndVampires}">
+        <DataGrid Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EndVampires}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Tidspunkt" Binding="{Binding CallEndedTime}"/>
@@ -29,7 +24,7 @@
         </DataGrid>
         
         <!-- Vip grid-->
-        <DataGrid Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="325,45,0,0" AutoGenerateColumns="False" ItemsSource="{Binding VipVampires}">
+        <DataGrid Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="325,45,0,0" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding VipVampires}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Prioritet" Binding="{Binding Priority}"/>

@@ -18,6 +18,7 @@ namespace Obligatorisk_Opgave1.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public event WarningMessage CallFailed;
 
+
         public PriorityQueue<Vampire> VipVampires { get; set; } 
         public PriorityQueue<Vampire> StartVampires { get; set; }
         public PriorityQueue<Vampire> EndVampires { get; set; }
@@ -26,6 +27,7 @@ namespace Obligatorisk_Opgave1.ViewModels
         public RelayCommand MakeVip { get; set; }
 
         private string callerName = "";
+        
 
         public MainViewModel()
         {
@@ -59,18 +61,21 @@ namespace Obligatorisk_Opgave1.ViewModels
         {
             try
             {
+                if (currVamp != null)
+                    throw new Exception("Et opkald er allerede i gang");
+
                 if (VipVampires.Count > 0)
                 {
                     currVamp = VipVampires.Dequeue();
                     CallerName = currVamp.Name;
                 }
-
-                if (currVamp != null)
-                    throw new Exception("Et opkald er allerede i gang");
-                if (currVamp == null)
+                else
                 {
-                    currVamp = StartVampires.Dequeue();
-                    CallerName = currVamp.Name;
+                    if (currVamp == null)
+                    {
+                        currVamp = StartVampires.Dequeue();
+                        CallerName = currVamp.Name;
+                    }
                 }
             }
             catch (Exception ex)
@@ -86,9 +91,11 @@ namespace Obligatorisk_Opgave1.ViewModels
             {
                 if (currVamp == null)
                     throw new Exception("Der er ikke noget opkald i gang");
+
                 if (currVamp != null)
                 {
                     EndVampires.Enqueue(currVamp);
+                    currVamp.CallEndedTime = DateTime.Now.ToString("HH:mm:ss");
                     CallerName = "";
                     currVamp = null;
                 }
@@ -98,7 +105,6 @@ namespace Obligatorisk_Opgave1.ViewModels
                 if (CallFailed != null)
                     CallFailed(ex);
             }
-            
         }
         
         public Vampire selectedVamp { get; set; }
@@ -107,9 +113,7 @@ namespace Obligatorisk_Opgave1.ViewModels
             try
             {
                 if (selectedVamp == null)
-                {
                     throw new Exception("Der er ikke valgt nogen vampyr");
-                }
                 selectedVamp.IsVip = true;
                 VipVampires.Enqueue(selectedVamp);
                 StartVampires.Remove(selectedVamp);

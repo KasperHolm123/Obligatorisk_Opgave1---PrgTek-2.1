@@ -15,8 +15,7 @@ namespace Obligatorisk_Opgave1
 
 
         public LinkedList<T> _list = new LinkedList<T>();
-        public int Count => throw new NotImplementedException();
-
+        public int Count => _list.Count;
 
         public void Enqueue(T item)
         {
@@ -57,8 +56,8 @@ namespace Obligatorisk_Opgave1
         public void Remove(T item)
         {
             _list.Remove(item);
+            OnCollectionChanged();
         }
-
         public T Peek()
         {
             if (_list.Count == 0)
@@ -66,11 +65,13 @@ namespace Obligatorisk_Opgave1
 
             return _list.First.Value;
         }
+
         public void Clear()
         {
             _list.Clear();
             OnCollectionChanged();
         }
+
         public T[] ToArray()
         {
             throw new NotImplementedException();
@@ -87,11 +88,13 @@ namespace Obligatorisk_Opgave1
         {
             return _list.GetEnumerator();
         }
+
         private void OnCollectionChanged()
         {
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
+
         void IPriorityQueue<T>.Enqueue(T elem, int p)
         {
             throw new NotImplementedException();

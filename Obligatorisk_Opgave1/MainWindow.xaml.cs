@@ -22,6 +22,7 @@ namespace Obligatorisk_Opgave1
     public partial class MainWindow : Window
     {
         MainViewModel model = new MainViewModel();
+
         public MainWindow()
         {
             DataContext = model;

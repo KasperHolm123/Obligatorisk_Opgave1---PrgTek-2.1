@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_Opgave1
 {
-    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T> 
+    public class PriorityQueue<T> : INotifyCollectionChanged, IPriorityQueue<T>, IEnumerable<T>  where T : IPrioritizable
     {
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
@@ -64,6 +64,7 @@ namespace Obligatorisk_Opgave1
         public void Clear()
         {
             _list.Clear();
+            OnCollectionChanged();
         }
         public T[] ToArray()
         {

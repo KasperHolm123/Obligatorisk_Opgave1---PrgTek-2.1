@@ -12,17 +12,16 @@ using System.Diagnostics;
 namespace Obligatorisk_Opgave1.ViewModels
 {
     public delegate void WarningMessage(Exception ex);
-    public class MainViewModel
+
+    public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event WarningMessage CallFailed;
 
         public PriorityQueue<Vampire> StartVampires { get; set; }
         public PriorityQueue<Vampire> EndVampires { get; set; }
-        public string CurrName { get; set; }
-        public int CurrPriority { get; set; }
         public RelayCommand StartCall { get; set; }
         public RelayCommand StopCall { get; set; }
-        public event WarningMessage CallFailed;
 
         private string callerName = "";
 
@@ -38,10 +37,10 @@ namespace Obligatorisk_Opgave1.ViewModels
         private void FillLists()
         {
             Vampire vamp1 = new Vampire(1, 0, "Kasper");
-            Vampire vamp2 = new Vampire(2, 50, "bruh");
-            Vampire vamp3 = new Vampire(3, 200, "br");
+            Vampire vamp2 = new Vampire(2, 50, "Emil");
+            Vampire vamp3 = new Vampire(3, 200, "Martin");
             Vampire vamp4 = new Vampire(4, 100, "Jonas");
-            Vampire vamp5 = new Vampire(0, "bro");
+            Vampire vamp5 = new Vampire(0, "Hans");
             StartVampires.Enqueue(vamp1, vamp1.Priority);
             StartVampires.Enqueue(vamp4, vamp4.Priority);
             StartVampires.Enqueue(vamp5);
@@ -54,25 +53,38 @@ namespace Obligatorisk_Opgave1.ViewModels
         {
             try
             {
-                if(CallStarted) throw new Exception("bruh");
-                currVamp = StartVampires.Dequeue();
-                CurrName = currVamp.Name;
-                CurrPriority = currVamp.Priority;
-                CallStarted = true;
+                if (currVamp != null)
+                    throw new Exception("Et opkald er allerede i gang");
+                if (currVamp == null)
+                {
+                    currVamp = StartVampires.Dequeue();
+                    CallerName = currVamp.Name;
+                }
             }
             catch (Exception ex)
             {
-                if(CallFailed != null) CallFailed(ex);
+                if(CallFailed != null)
+                    CallFailed(ex);
             }
         }
 
         private void EndCall()
         {
-            if (currVamp != null)
+            try
             {
-                EndVampires.Enqueue(currVamp);
-                CallerName = "";
-                currVamp = null;
+                if (currVamp == null)
+                    throw new Exception("Der er ikke noget opkald i gang");
+                if (currVamp != null)
+                {
+                    EndVampires.Enqueue(currVamp);
+                    CallerName = "";
+                    currVamp = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (CallFailed != null)
+                    CallFailed(ex);
             }
             
         }
@@ -121,7 +133,7 @@ namespace Obligatorisk_Opgave1.ViewModels
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameter)//Invoke delegate
+        public void Execute(object parameter) //Invoke delegate
         {
             execute(parameter);
         }

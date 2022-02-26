@@ -43,7 +43,7 @@ namespace Obligatorisk_Opgave1
         public T Dequeue()
         {
             if (_list.Count == 0)
-                throw new InvalidOperationException("The queue is empty");
+                throw new InvalidOperationException("Køen er tom");
 
             T value = _list.First.Value;
 
@@ -60,7 +60,7 @@ namespace Obligatorisk_Opgave1
         public T Peek()
         {
             if (_list.Count == 0)
-                throw new InvalidOperationException("The queue is empty");
+                throw new InvalidOperationException("Køen er tom");
 
             return _list.First.Value;
         }

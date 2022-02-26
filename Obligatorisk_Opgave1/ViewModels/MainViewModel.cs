@@ -40,7 +40,7 @@ namespace Obligatorisk_Opgave1.ViewModels
             MakeVip = new RelayCommand(p => MakeVampireVip());
         }
 
-        private void FillLists()
+        private void FillLists() // Create a list of vampires to test the program with.
         {
             Vampire vamp1 = new Vampire(1, "Kasper");
             Vampire vamp2 = new Vampire(2, "Emil");
@@ -48,6 +48,9 @@ namespace Obligatorisk_Opgave1.ViewModels
             Vampire vamp4 = new Vampire(4, "Jonas");
             Vampire vamp5 = new Vampire(0, "Hans");
             Vampire vamp6Vip = new Vampire(5, "Jesper");
+
+            // The vampires get enqueued out of order to show
+            // that the enqueue method works as intended.
             StartVampires.Enqueue(vamp1, vamp1.Priority);
             StartVampires.Enqueue(vamp4, vamp4.Priority);
             StartVampires.Enqueue(vamp5);
@@ -56,15 +59,15 @@ namespace Obligatorisk_Opgave1.ViewModels
             StartVampires.Enqueue(vamp6Vip, vamp6Vip.Priority);
         }
 
-        private Vampire currVamp;
+        private Vampire currVamp; // Current caller object.
         private void TakeCall()
         {
             try
             {
-                if (currVamp != null)
+                if (currVamp != null) // If a call is already in session, you cannot start another.
                     throw new Exception("Et opkald er allerede i gang");
 
-                if (VipVampires.Count > 0)
+                if (VipVampires.Count > 0) // If the VIP queue contains vampires, prioritize that queue.
                 {
                     currVamp = VipVampires.Dequeue();
                     CallerName = currVamp.Name;
@@ -89,15 +92,14 @@ namespace Obligatorisk_Opgave1.ViewModels
         {
             try
             {
-                if (currVamp == null)
+                if (currVamp == null) // You can't end a call if no call is in session.
                     throw new Exception("Der er ikke noget opkald i gang");
-
-                if (currVamp != null)
+                else
                 {
                     EndVampires.Enqueue(currVamp);
                     currVamp.CallEndedTime = DateTime.Now.ToString("HH:mm:ss");
                     CallerName = "";
-                    currVamp = null;
+                    currVamp = null; // This line makes sure the call has ended.
                 }
             }
             catch (Exception ex)
@@ -107,14 +109,14 @@ namespace Obligatorisk_Opgave1.ViewModels
             }
         }
         
-        public Vampire selectedVamp { get; set; }
+        public Vampire selectedVamp { get; set; } // Variable used to contain the selected vampire in a datagrid.
         private void MakeVampireVip()
         {
             try
             {
-                if (selectedVamp == null)
+                if (selectedVamp == null) // If no vampire is selected; throw an exception.
                     throw new Exception("Der er ikke valgt nogen vampyr");
-                selectedVamp.IsVip = true;
+                selectedVamp.IsVip = true; // Kinda redundant, but whatever
                 VipVampires.Enqueue(selectedVamp);
                 StartVampires.Remove(selectedVamp);
                 selectedVamp = null;
@@ -126,7 +128,7 @@ namespace Obligatorisk_Opgave1.ViewModels
             }
         }
 
-        public string CallerName
+        public string CallerName // Used to display the caller's name on a datagrid.
         {
             get { return callerName; }
             set
@@ -143,6 +145,9 @@ namespace Obligatorisk_Opgave1.ViewModels
 
     }
 
+    /// <summary>
+    /// General relay command class used to bind WPF buttons to a method in a MVVM pattern.
+    /// </summary>
     public class RelayCommand : ICommand
     {
         readonly Action<object> execute;

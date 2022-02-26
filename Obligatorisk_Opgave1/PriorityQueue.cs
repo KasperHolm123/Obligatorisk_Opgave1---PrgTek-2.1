@@ -13,7 +13,6 @@ namespace Obligatorisk_Opgave1
     {
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-
         public LinkedList<T> _list = new LinkedList<T>();
         public int Count => _list.Count;
 
@@ -74,7 +73,7 @@ namespace Obligatorisk_Opgave1
 
         public T[] ToArray()
         {
-            throw new NotImplementedException();
+            return _list.ToArray();
         }
 
         int IPriorityQueue<T>.Count => throw new NotImplementedException();
@@ -93,11 +92,6 @@ namespace Obligatorisk_Opgave1
         {
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-        }
-
-        void IPriorityQueue<T>.Enqueue(T elem, int p)
-        {
-            throw new NotImplementedException();
         }
 
         T[] IPriorityQueue<T>.ToArray()

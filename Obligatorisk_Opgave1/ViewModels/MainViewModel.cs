@@ -135,7 +135,7 @@ namespace Obligatorisk_Opgave1.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        
         private void OnPropertyChanged(string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

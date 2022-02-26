@@ -18,9 +18,10 @@ namespace Obligatorisk_Opgave1.Models
             set { callEndedTime = value; }
         }
 
-        public Vampire(string name)
+        public Vampire(string name, bool vip = false)
         {
             Name = name;
+            IsVip = vip;
         }
 
         public Vampire(int priority, string name, bool vip = false)
